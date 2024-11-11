@@ -1,0 +1,88 @@
+﻿@model PokemonApp.Models.Pokemon
+
+<style>
+    body {
+        font-family: "Press Start 2P", cursive;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #faf8ef;
+        border: 4px solid #333;
+        padding: 20px;
+        box-shadow: 5px 5px 0px #000;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 20px;
+        color: #222;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+        ul li {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+    .btn {
+        font-family: "Press Start 2P", cursive;
+        font-size: 14px;
+        padding: 12px 20px;
+        color: #fff;
+        border: 2px solid #333;
+        text-align: center;
+        box-shadow: 3px 3px 0px #000;
+        cursor: pointer;
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 4px 4px 0px #000;
+    }
+</style>
+
+<div class="container">
+    <h2>Delete Pokémon</h2>
+    <p>Are you sure you want to delete this Pokémon?</p>
+    <ul>
+        <li><strong>Name:</strong> @Model.Nombre</li>
+        <li><strong>Type:</strong> @Model.Tipo</li>
+        <li><strong>Weakness:</strong> @Model.Debilidad</li>
+        <li><strong>Evolution:</strong> @Model.Evolucion</li>
+        <li><strong>Weight:</strong> @Model.Peso kg</li>
+        <li><strong>Number:</strong> @Model.Numero</li>
+    </ul>
+    <form asp-action="Delete" method="post">
+        @Html.AntiForgeryToken() <!-- Token anti-CSRF -->
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="@Url.Action("Index", "Pokedex")" class="btn btn-primary">Cancel</a>
+    </form>
+</div>

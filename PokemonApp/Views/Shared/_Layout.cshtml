@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Pokémon Management System</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Press Start 2P", cursive;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #faf8ef;
+            color: #000;
+            border-bottom: 4px solid #333;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+        }
+
+            header h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            header nav {
+                margin-top: 10px;
+            }
+
+            header a {
+                color: #000;
+                text-decoration: none;
+                margin: 0 10px;
+            }
+
+                header a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pokémon Management System</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/Pokedex">Pokédex</a>
+            <a href="/Trainer">Trainers</a>
+            <a href="/Admin">Admin</a>
+            <a href="/Nurse">Nurse</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        @RenderBody()
+    </div>
+</body>
+</html>
