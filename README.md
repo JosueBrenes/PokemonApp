@@ -24,34 +24,48 @@ Follow these steps to get started with the project:
 
    - Navigate to the **Service** folder and delete the `Class1.cs` file.  
    - Navigate to the **Data** folder and delete the `Class1.cs` file.
+  
+5. **Modify the Web.config File** ⚙️  
 
-5. **Clean the Solution** 🧹  
+   - Open the `Web.config` file in the `PokemonApp.MVC` project.  
+   - Locate the following section:
+
+     ```xml
+     <connectionStrings>
+       <add name="DatabaseEntities" connectionString="metadata=res://*/Models.Database.csdl|res://*/Models.Database.ssdl|res://*/Models.Database.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=JOSUEBRENES;initial catalog=POKEMON_PROYECT;integrated security=True;encrypt=False;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+     </connectionStrings>
+     ```
+
+   - Replace `data source=JOSUEBRENES` with the name of your SQL Server instance.  
+   - Replace `catalog=POKEMON_PROYECT` with the name of your database.
+
+6. **Clean the Solution** 🧹  
 
    In Visual Studio, go to **Build** > **Clean Solution**.
 
-6. **Rebuild the Solution** 🔧  
+7. **Rebuild the Solution** 🔧  
 
    In Visual Studio, go to **Build** > **Rebuild Solution**.
 
-7. **Make Your Changes** ✏️  
+8. **Make Your Changes** ✏️  
 
    - Implement your changes or features in the codebase.
 
-8. **Commit Your Changes** 💾  
+9. **Commit Your Changes** 💾  
 
    ```bash
    git add .
    git commit -m "feat: describe your changes here"
    ```
-  - Refer to the [GIT_GUIDELINE](./GIT_GUIDELINE.md) document in the repository for proper commit message tags and conventions.
+   - Refer to the [GIT_GUIDELINE](./GIT_GUIDELINE.md) document in the repository for proper commit message tags and conventions.
 
-9. **Push Changes to Your Forked Repository** ⬆️
+10. **Push Changes to Your Forked Repository** ⬆️
   
    ```bash
    git push origin <branch-name>
    ```
 
-10. **Create a Pull Request** 🔀  
+11. **Create a Pull Request** 🔀  
     - Go to the original repository on GitHub.  
     - Click **Pull Requests** > **New Pull Request**.  
     - Compare your forked branch with the base branch.  
