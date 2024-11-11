@@ -22,9 +22,9 @@ INSERT INTO Roles (Nombre) VALUES
 ('Desarrollador'),
 ('Moderador'),
 ('Visitante'),
-('Líder de equipo'),
+('LÃ­der de equipo'),
 ('Instructor'),
-('Médico'),
+('MÃ©dico'),
 ('Cuidador'),
 ('Veterinario'),
 ('Organizador'),
@@ -36,13 +36,13 @@ CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY(1,1),
     RolId INT NOT NULL,
     Usuario NVARCHAR(50) NOT NULL,
-    Contraseña VARBINARY(256) NOT NULL,
+    ContraseÃ±a VARBINARY(256) NOT NULL,
     Nombre NVARCHAR(100) NOT NULL,
     CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (RolId) REFERENCES Roles(Id)
 );
 
 -- INSERTAR DATOS EN LA TABLA Usuarios
-INSERT INTO Usuarios (RolId, Usuario, Contraseña, Nombre) VALUES 
+INSERT INTO Usuarios (RolId, Usuario, ContraseÃ±a, Nombre) VALUES 
 (1, 'AshKetchum', HASHBYTES('SHA2_256', 'password1'), 'Ash Ketchum'),
 (1, 'Misty', HASHBYTES('SHA2_256', 'password2'), 'Misty Waterflower'),
 (1, 'Brock', HASHBYTES('SHA2_256', 'password3'), 'Brock Harrison'),
@@ -73,19 +73,19 @@ CREATE TABLE Pokemon (
 
 -- INSERTAR DATOS EN LA TABLA Pokemon
 INSERT INTO Pokemon (Nombre, Tipo, Debilidad, Evolucion, Peso, Numero) VALUES 
-('Pikachu', 'Eléctrico', 'Tierra', 'Raichu', 6.00, 25),
+('Pikachu', 'ElÃ©ctrico', 'Tierra', 'Raichu', 6.00, 25),
 ('Bulbasaur', 'Planta/Veneno', 'Fuego', 'Ivysaur', 6.90, 1),
 ('Charmander', 'Fuego', 'Agua', 'Charmeleon', 8.50, 4),
-('Squirtle', 'Agua', 'Eléctrico', 'Wartortle', 9.00, 7),
+('Squirtle', 'Agua', 'ElÃ©ctrico', 'Wartortle', 9.00, 7),
 ('Jigglypuff', 'Normal/Hada', 'Acero', 'Wigglytuff', 5.50, 39),
 ('Meowth', 'Normal', 'Lucha', 'Persian', 4.20, 52),
-('Psyduck', 'Agua', 'Eléctrico', 'Golduck', 19.60, 54),
-('Machop', 'Lucha', 'Psíquico', 'Machoke', 19.50, 66),
+('Psyduck', 'Agua', 'ElÃ©ctrico', 'Golduck', 19.60, 54),
+('Machop', 'Lucha', 'PsÃ­quico', 'Machoke', 19.50, 66),
 ('Geodude', 'Roca/Tierra', 'Agua', 'Graveler', 20.00, 74),
 ('Eevee', 'Normal', 'Lucha', 'Vaporeon', 6.50, 133),
 ('Snorlax', 'Normal', 'Lucha', NULL, 460.00, 143),
-('Mewtwo', 'Psíquico', 'Bicho', NULL, 122.00, 150),
-('Pidgey', 'Normal/Volador', 'Eléctrico', 'Pidgeotto', 1.80, 16),
+('Mewtwo', 'PsÃ­quico', 'Bicho', NULL, 122.00, 150),
+('Pidgey', 'Normal/Volador', 'ElÃ©ctrico', 'Pidgeotto', 1.80, 16),
 ('Rattata', 'Normal', 'Lucha', 'Raticate', 3.50, 19),
-('Abra', 'Psíquico', 'Fantasma', 'Kadabra', 19.50, 63);
+('Abra', 'PsÃ­quico', 'Fantasma', 'Kadabra', 19.50, 63);
 GO
