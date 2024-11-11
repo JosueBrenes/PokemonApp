@@ -39,19 +39,23 @@ Follow these steps to get started with the project:
    - Replace `data source=JOSUEBRENES` with the name of your SQL Server instance.  
    - Replace `catalog=POKEMON_PROYECT` with the name of your database.
 
-6. **Clean the Solution** 🧹  
+6. **Run the Database Script** 🗄️  
+
+   - Before running the application, ensure you execute the provided SQL script to create and populate the database in SQL Server.
+
+7. **Clean the Solution** 🧹  
 
    In Visual Studio, go to **Build** > **Clean Solution**.
 
-7. **Rebuild the Solution** 🔧  
+8. **Rebuild the Solution** 🔧  
 
    In Visual Studio, go to **Build** > **Rebuild Solution**.
 
-8. **Make Your Changes** ✏️  
+9. **Make Your Changes** ✏️  
 
    - Implement your changes or features in the codebase.
 
-9. **Commit Your Changes** 💾  
+10. **Commit Your Changes** 💾  
 
    ```bash
    git add .
@@ -59,13 +63,13 @@ Follow these steps to get started with the project:
    ```
    - Refer to the [GIT_GUIDELINE](./GIT_GUIDELINE.md) document in the repository for proper commit message tags and conventions.
 
-10. **Push Changes to Your Forked Repository** ⬆️
+11. **Push Changes to Your Forked Repository** ⬆️
   
    ```bash
    git push origin <branch-name>
    ```
 
-11. **Create a Pull Request** 🔀  
+12. **Create a Pull Request** 🔀  
     - Go to the original repository on GitHub.  
     - Click **Pull Requests** > **New Pull Request**.  
     - Compare your forked branch with the base branch.  
