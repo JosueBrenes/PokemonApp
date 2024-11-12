@@ -1,34 +1,35 @@
-﻿@model PokemonApp.Models.LoginView
+﻿
+@model IEnumerable<PokemonApp.Models.LoginView>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <form asp-action="Login" method="post">
-        <div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="Username" value="@Model.Username">
-            @Html.ValidationMessageFor(model => model.Username)
-        </div>
-        <div>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="Password">
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-        <p>@Model.ErrorMessage</p>
-        }
-        <div>
-            <button type="submit">Log In</button>
-            <button type="button">Register</button>
-        </div>
-    </form>
-    <p>Log in or create an account to start. No email required!</p>
-</body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+    </head>
+    <body>
+        <h2>Login</h2>
+        <form asp-action="Login" method="post">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="Username" value="@Model.Username">
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="Password">
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+            <p>@Model.ErrorMessage</p>
+            }
+            <div>
+                <button type="submit">Log In</button>
+                <button type="button">Register</button>
+            </div>
+        </form>
+        <p>Log in or create an account to start. No email required!</p>
+    </body>
 </html>
