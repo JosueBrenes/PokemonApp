@@ -1,27 +1,85 @@
 ﻿@model IEnumerable<PokemonApp.Models.NurseRequest>
 
-<h2>Solicitudes de Atención</h2>
+<style>
+    body {
+        font-family: "Press Start 2P", cursive;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Pokémon</th>
-            <th>Descripción</th>
-            <th>Enfermera</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
-    <tbody>
+    .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: #faf8ef;
+        border: 4px solid #333;
+        padding: 20px;
+        box-shadow: 5px 5px 0px #000;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 20px;
+        color: #222;
+        margin-bottom: 20px;
+    }
+
+    /* Cards Design */
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 2px solid #333;
+        box-shadow: 5px 5px 0px #000;
+        padding: 15px;
+        text-align: center;
+    }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .card p {
+            font-size: 12px;
+            margin: 5px 0;
+            color: #555;
+        }
+
+    .status-pending {
+        color: #d9534f;
+        font-weight: bold;
+    }
+
+    .status-attended {
+        color: #28a745;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+    <h2>Attention Requests</h2>
+    <div class="card-grid">
         @foreach (var request in Model)
         {
-            <tr>
-                <td>@request.Id</td>
-                <td>@request.PokemonName</td>
-                <td>@request.Description</td>
-                <td>@request.AssignedNurse</td>
-                <td>@(request.IsAttended ? "Atendido" : "Pendiente")</td>
-            </tr>
+            <div class="card">
+                <h3>Pokémon: @request.PokemonName</h3>
+                <p><strong>Description:</strong> @request.Description</p>
+                <p><strong>Nurse:</strong> @request.AssignedNurse</p>
+                <p>
+                    <strong>Status:</strong>
+                    <span class="@((request.IsAttended ? "status-attended" : "status-pending"))">
+                        @(request.IsAttended ? "Attended" : "Pending")
+                    </span>
+                </p>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
