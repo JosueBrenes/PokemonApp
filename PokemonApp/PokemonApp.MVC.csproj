@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BattleController.cs" />
     <Compile Include="Controllers\PokedexController.cs" />
     <Compile Include="Controllers\NurseController.cs" />
     <Compile Include="Controllers\TrainerController.cs" />
@@ -161,6 +162,7 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Nurse.cs" />
+    <Compile Include="Models\Battle.cs" />
     <Compile Include="Models\Trainer.cs" />
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>Database.tt</DependentUpon>
@@ -239,9 +241,11 @@
     <Content Include="Views\Pokedex\Edit.cshtml" />
     <Content Include="Views\Pokedex\Delete.cshtml" />
     <Content Include="Views\Nurse\Index.cshtml" />
-    <None Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Nurse\CreateRequest.cshtml" />
     <Content Include="Views\Nurse\Requests.cshtml" />
+    <Content Include="Views\Battle\Index.cshtml" />
+    <Content Include="Views\Battle\BattleResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
