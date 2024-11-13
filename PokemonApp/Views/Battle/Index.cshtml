@@ -1,6 +1,4 @@
-﻿@model IEnumerable<PokemonApp.Models.Pokemon>
-
-<style>
+﻿<style>
     body {
         font-family: "Press Start 2P", cursive;
         background-color: #f4f4f4;
@@ -22,25 +20,92 @@
         color: #222;
     }
 
-    .btn {
-        display: block;
-        width: fit-content;
-        margin: 0 auto 20px auto;
-        font-size: 12px;
-        padding: 10px 15px;
-        color: #fff;
-        background-color: #28a745;
-        border: 2px solid #333;
+    .pokemon-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .pokemon-card {
+        width: 45%;
         text-align: center;
+        background-color: #fff;
+        border: 2px solid #333;
         box-shadow: 5px 5px 0px #000;
-        cursor: pointer;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .btn-primary {
+        .pokemon-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+    .health-bar {
+        display: flex;
+        gap: 5px;
+        margin: 10px 0;
+    }
+
+    .health-line {
+        width: 30px;
+        height: 10px;
+        background-color: green;
+    }
+
+    .round-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .round-circle {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #bbb;
+        border: 1px solid #333;
+    }
+
+        .round-circle.won {
+            background-color: green;
+        }
+
+        .round-circle.lost {
+            background-color: red;
+        }
+
+    .battle-result-text {
+        text-align: center;
+        font-size: 16px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #222;
+    }
+
+    .btn-primary, .btn-attack {
+        display: block;
+        margin: 20px auto;
         background-color: #28a745;
+        color: #fff;
+        padding: 10px 15px;
+        border: 2px solid #333;
+        cursor: pointer;
+        box-shadow: 5px 5px 0px #000;
+        font-size: 14px;
     }
 
-    .btn:hover {
+    .btn-disabled {
+        background-color: #bbb;
+        cursor: not-allowed;
+    }
+
+    .btn:hover:not(.btn-disabled) {
         transform: scale(1.1);
         box-shadow: 4px 4px 0px #000;
     }
@@ -52,29 +117,227 @@
         width: 100%;
         box-shadow: 3px 3px 0px #000;
         font-size: 12px;
-        margin-bottom: 20px;
+    }
+
+    .winner-container {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #28a745;
     }
 </style>
 
 <div class="container">
-    <h2>Select Pokémon for Battle</h2>
-    <form method="post" action="/Battle/StartBattle">
-        <label for="pokemon1Id">Select First Pokémon:</label>
-        <select id="pokemon1Id" name="pokemon1Id">
-            @foreach (var pokemon in Model)
-            {
-                <option value="@pokemon.Id">@pokemon.Nombre</option>
-            }
-        </select>
+    <h2>Round <span id="roundNumber">1</span></h2>
+    <div class="pokemon-container">
+        <div class="pokemon-card">
+            <div class="round-indicators" id="player1Rounds">
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+            </div>
+            <h3 id="pokemon1Name">Select a Pokémon</h3>
+            <img id="pokemon1Image" src="/Content/gif/default.gif" alt="First Pokémon Image" />
+            <div class="health-bar" id="pokemon1HealthBar">
+                <div class="health-line"></div>
+                <div class="health-line"></div>
+                <div class="health-line"></div>
+            </div>
+            <select id="pokemon1Id" onchange="updateImage('pokemon1Image', this)">
+                <option value="">Select...</option>
+                @foreach (var pokemon in Model)
+                {
+                    <option value="@pokemon.Id">@pokemon.Nombre</option>
+                }
+            </select>
+        </div>
 
-        <label for="pokemon2Id">Select Second Pokémon:</label>
-        <select id="pokemon2Id" name="pokemon2Id">
-            @foreach (var pokemon in Model)
-            {
-                <option value="@pokemon.Id">@pokemon.Nombre</option>
-            }
-        </select>
+        <div class="pokemon-card">
+            <div class="round-indicators" id="player2Rounds">
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+                <div class="round-circle"></div>
+            </div>
+            <h3 id="pokemon2Name">Select a Pokémon</h3>
+            <img id="pokemon2Image" src="/Content/gif/default.gif" alt="Second Pokémon Image" />
+            <div class="health-bar" id="pokemon2HealthBar">
+                <div class="health-line"></div>
+                <div class="health-line"></div>
+                <div class="health-line"></div>
+            </div>
+            <select id="pokemon2Id" onchange="updateImage('pokemon2Image', this)">
+                <option value="">Select...</option>
+                @foreach (var pokemon in Model)
+                {
+                    <option value="@pokemon.Id">@pokemon.Nombre</option>
+                }
+            </select>
+        </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Start Battle</button>
-    </form>
+    <button type="button" class="btn-primary btn-disabled" id="startRoundButton" onclick="startRound()" disabled>Start Round</button>
+    <button type="button" class="btn-primary btn-disabled" id="attackButton" onclick="launchAttack()" disabled>Launch Attack</button>
+    <h3 id="battleResult" class="battle-result-text"></h3>
+
+    <div id="winnerContainer" class="winner-container" style="display: none;">
+        <h3 id="winnerAnnouncement"></h3>
+        <button class="btn-primary" onclick="resetBattle()">Start a New Battle</button>
+    </div>
 </div>
+
+<<script>
+    let round = 1;
+    let pokemon1Health = 3;
+    let pokemon2Health = 3;
+    let roundsPlayed = 0;
+    let player1Wins = 0;
+    let player2Wins = 0;
+
+    function updateImage(imgElementId, selectElement) {
+        const selectedId = selectElement.value;
+        const imgElement = document.getElementById(imgElementId);
+        imgElement.src = selectedId ? `/Content/gif/${selectedId}.gif` : '/Content/gif/default.gif';
+
+        if (imgElementId === 'pokemon1Image') {
+            document.getElementById('pokemon1Name').innerText = selectElement.options[selectElement.selectedIndex].text || "Select a Pokémon";
+        } else if (imgElementId === 'pokemon2Image') {
+            document.getElementById('pokemon2Name').innerText = selectElement.options[selectElement.selectedIndex].text || "Select a Pokémon";
+        }
+
+        toggleStartRoundButton();
+    }
+
+    function toggleStartRoundButton() {
+        const pokemon1Selected = document.getElementById('pokemon1Id').value;
+        const pokemon2Selected = document.getElementById('pokemon2Id').value;
+
+        const startButton = document.getElementById('startRoundButton');
+        startButton.disabled = !(pokemon1Selected && pokemon2Selected);
+        startButton.classList.toggle('btn-disabled', startButton.disabled);
+    }
+
+    function startRound() {
+        document.getElementById('startRoundButton').disabled = true;
+        document.getElementById('startRoundButton').classList.add('btn-disabled');
+        document.getElementById('attackButton').disabled = false;
+        document.getElementById('attackButton').classList.remove('btn-disabled');
+        document.getElementById('battleResult').innerText = `Round ${round} in progress!`;
+    }
+
+    function launchAttack() {
+        const pokemon1Attack = Math.floor(Math.random() * 100) + 1;
+        const pokemon2Attack = Math.floor(Math.random() * 100) + 1;
+
+        if (pokemon1Attack > pokemon2Attack) {
+            pokemon2Health--;
+            document.getElementById('battleResult').innerText = `Player 1's Pokémon attacks successfully!`;
+        } else if (pokemon2Attack > pokemon1Attack) {
+            pokemon1Health--;
+            document.getElementById('battleResult').innerText = `Player 2's Pokémon attacks successfully!`;
+        } else {
+            document.getElementById('battleResult').innerText = "Both Pokémon miss their attacks!";
+        }
+
+        updateHealthBars();
+
+        if (pokemon1Health === 0 || pokemon2Health === 0) {
+            roundsPlayed++;
+            document.getElementById('attackButton').disabled = true;
+            document.getElementById('attackButton').classList.add('btn-disabled');
+            document.getElementById('startRoundButton').disabled = false;
+            document.getElementById('startRoundButton').classList.remove('btn-disabled');
+
+            if (pokemon1Health === 0) {
+                player2Wins++;
+                updateRoundIndicator('player2Rounds', roundsPlayed - 1, true);
+                updateRoundIndicator('player1Rounds', roundsPlayed - 1, false);
+                document.getElementById('battleResult').innerText = `Player 1's Pokémon fainted! Round ${round} goes to Player 2.`;
+            } else if (pokemon2Health === 0) {
+                player1Wins++;
+                updateRoundIndicator('player1Rounds', roundsPlayed - 1, true);
+                updateRoundIndicator('player2Rounds', roundsPlayed - 1, false);
+                document.getElementById('battleResult').innerText = `Player 2's Pokémon fainted! Round ${round} goes to Player 1.`;
+            }
+
+            // Check for automatic victory if 3 rounds are won
+            if (player1Wins === 3 || player2Wins === 3) {
+                declareWinner();
+            } else if (roundsPlayed >= 5) {
+                declareWinner();
+            } else {
+                round++;
+                document.getElementById('roundNumber').innerText = round;
+                pokemon1Health = 3;
+                pokemon2Health = 3;
+                updateHealthBars();
+            }
+        }
+    }
+
+    function updateRoundIndicator(playerId, roundIndex, isWinner) {
+        const circles = document.getElementById(playerId).children;
+        circles[roundIndex].classList.add(isWinner ? 'won' : 'lost');
+    }
+
+    function updateHealthBars() {
+        const pokemon1Bar = document.getElementById('pokemon1HealthBar');
+        const pokemon2Bar = document.getElementById('pokemon2HealthBar');
+
+        pokemon1Bar.innerHTML = "";
+        pokemon2Bar.innerHTML = "";
+
+        for (let i = 0; i < pokemon1Health; i++) {
+            pokemon1Bar.innerHTML += '<div class="health-line"></div>';
+        }
+
+        for (let i = 0; i < pokemon2Health; i++) {
+            pokemon2Bar.innerHTML += '<div class="health-line"></div>';
+        }
+    }
+
+    function declareWinner() {
+        document.getElementById('attackButton').disabled = true;
+        document.getElementById('startRoundButton').disabled = true;
+        document.getElementById('winnerContainer').style.display = 'block';
+
+        if (player1Wins > player2Wins) {
+            document.getElementById('winnerAnnouncement').innerText = `Player 1 wins the battle with ${player1Wins} rounds won!`;
+        } else if (player2Wins > player1Wins) {
+            document.getElementById('winnerAnnouncement').innerText = `Player 2 wins the battle with ${player2Wins} rounds won!`;
+        } else {
+            document.getElementById('winnerAnnouncement').innerText = `It's a draw! Both players have equal wins.`;
+        }
+    }
+
+    function resetBattle() {
+        round = 1;
+        pokemon1Health = 3;
+        pokemon2Health = 3;
+        roundsPlayed = 0;
+        player1Wins = 0;
+        player2Wins = 0;
+
+        document.getElementById('roundNumber').innerText = round;
+        document.getElementById('winnerContainer').style.display = 'none';
+        document.getElementById('startRoundButton').disabled = true;
+        document.getElementById('startRoundButton').classList.add('btn-disabled');
+        document.getElementById('attackButton').disabled = true;
+        document.getElementById('attackButton').classList.add('btn-disabled');
+        document.getElementById('battleResult').innerText = "";
+
+        const player1Rounds = document.getElementById('player1Rounds').children;
+        const player2Rounds = document.getElementById('player2Rounds').children;
+
+        for (let i = 0; i < player1Rounds.length; i++) {
+            player1Rounds[i].className = "round-circle";
+            player2Rounds[i].className = "round-circle";
+        }
+
+        updateHealthBars();
+    }
+</script>

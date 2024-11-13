@@ -5,8 +5,10 @@ public class Battle
 {
     public Pokemon Pokemon1 { get; set; }
     public Pokemon Pokemon2 { get; set; }
+    public int Pokemon1Health { get; set; } = 3;
+    public int Pokemon2Health { get; set; } = 3;
 
-    public string StartBattle()
+    public string StartRound()
     {
         Random random = new Random();
         int pokemon1Attack = random.Next(1, 100);
@@ -14,15 +16,22 @@ public class Battle
 
         if (pokemon1Attack > pokemon2Attack)
         {
-            return $"{Pokemon1.Nombre} wins the battle with an attack power of {pokemon1Attack}!";
+            Pokemon2Health--;
+            return $"{Pokemon1.Nombre} wins this round!";
         }
         else if (pokemon2Attack > pokemon1Attack)
         {
-            return $"{Pokemon2.Nombre} wins the battle with an attack power of {pokemon2Attack}!";
+            Pokemon1Health--;
+            return $"{Pokemon2.Nombre} wins this round!";
         }
         else
         {
-            return "It's a draw! Both Pokémon have equal attack power!";
+            return "It's a draw!";
         }
+    }
+
+    public bool IsBattleOver()
+    {
+        return Pokemon1Health == 0 || Pokemon2Health == 0;
     }
 }

@@ -185,6 +185,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\gif\1.gif" />
+    <Content Include="Content\gif\10.gif" />
+    <Content Include="Content\gif\2.gif" />
+    <Content Include="Content\gif\3.gif" />
+    <Content Include="Content\gif\4.gif" />
+    <Content Include="Content\gif\5.gif" />
+    <Content Include="Content\gif\7.gif" />
+    <Content Include="Content\gif\8.gif" />
+    <Content Include="Content\gif\9.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

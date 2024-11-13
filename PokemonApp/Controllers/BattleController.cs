@@ -5,6 +5,7 @@ using PokemonApp.Models;
 public class BattleController : Controller
 {
     private DatabaseEntities db = new DatabaseEntities();
+    private static Battle currentBattle;
 
     public ActionResult Index()
     {
@@ -23,10 +24,47 @@ public class BattleController : Controller
             return HttpNotFound("One or both Pokémon not found.");
         }
 
-        var battle = new Battle { Pokemon1 = pokemon1, Pokemon2 = pokemon2 };
-        var result = battle.StartBattle();
+        currentBattle = new Battle { Pokemon1 = pokemon1, Pokemon2 = pokemon2 };
+        return RedirectToAction("Round");
+    }
 
-        ViewBag.Result = result;
-        return View("BattleResult");
+    public ActionResult Round()
+    {
+        if (currentBattle == null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        ViewBag.Pokemon1Health = currentBattle.Pokemon1Health;
+        ViewBag.Pokemon2Health = currentBattle.Pokemon2Health;
+        ViewBag.Pokemon1Name = currentBattle.Pokemon1.Nombre;
+        ViewBag.Pokemon2Name = currentBattle.Pokemon2.Nombre;
+
+        return View();
+    }
+
+    [HttpPost]
+    public ActionResult PlayRound()
+    {
+        if (currentBattle == null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        ViewBag.Result = currentBattle.StartRound();
+
+        if (currentBattle.IsBattleOver())
+        {
+            string winner = currentBattle.Pokemon1Health > 0 ? currentBattle.Pokemon1.Nombre : currentBattle.Pokemon2.Nombre;
+            return RedirectToAction("BattleOver", new { winner });
+        }
+
+        return RedirectToAction("Round");
+    }
+
+    public ActionResult BattleOver(string winner)
+    {
+        ViewBag.Winner = winner;
+        return View();
     }
 }

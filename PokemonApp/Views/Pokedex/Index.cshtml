@@ -59,6 +59,12 @@
         text-align: center;
     }
 
+        .card img {
+            width: 100%;
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
         .card h3 {
             font-size: 18px;
             margin-bottom: 10px;
@@ -108,13 +114,13 @@
         @foreach (var pokemon in Model)
         {
             <div class="card">
+                <img src="@($"/Content/gif/{pokemon.Id}.gif")" alt="@pokemon.Nombre GIF" />
                 <h3>@pokemon.Nombre</h3>
                 <p><strong>Type:</strong> @pokemon.Tipo</p>
                 <p><strong>Weakness:</strong> @pokemon.Debilidad</p>
                 <p><strong>Evolution:</strong> @pokemon.Evolucion</p>
                 <p><strong>Weight:</strong> @pokemon.Peso kg</p>
                 <div>
-                    <a class="btn btn-info" href="@Url.Action("Details", "Pokedex", new { id = pokemon.Id })">Details</a>
                     <a class="btn btn-warning" href="@Url.Action("Edit", "Pokedex", new { id = pokemon.Id })">Edit</a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Pokedex", new { id = pokemon.Id })">Delete</a>
                 </div>

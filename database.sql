@@ -71,21 +71,19 @@ CREATE TABLE Pokemon (
     Numero INT NOT NULL
 );
 
+SET IDENTITY_INSERT [POKEMON_PROYECT].[dbo].[Pokemon] ON;
+
 -- INSERTAR DATOS EN LA TABLA Pokemon
-INSERT INTO Pokemon (Nombre, Tipo, Debilidad, Evolucion, Peso, Numero) VALUES 
-('Pikachu', 'Eléctrico', 'Tierra', 'Raichu', 6.00, 25),
-('Bulbasaur', 'Planta/Veneno', 'Fuego', 'Ivysaur', 6.90, 1),
-('Charmander', 'Fuego', 'Agua', 'Charmeleon', 8.50, 4),
-('Squirtle', 'Agua', 'Eléctrico', 'Wartortle', 9.00, 7),
-('Jigglypuff', 'Normal/Hada', 'Acero', 'Wigglytuff', 5.50, 39),
-('Meowth', 'Normal', 'Lucha', 'Persian', 4.20, 52),
-('Psyduck', 'Agua', 'Eléctrico', 'Golduck', 19.60, 54),
-('Machop', 'Lucha', 'Psíquico', 'Machoke', 19.50, 66),
-('Geodude', 'Roca/Tierra', 'Agua', 'Graveler', 20.00, 74),
-('Eevee', 'Normal', 'Lucha', 'Vaporeon', 6.50, 133),
-('Snorlax', 'Normal', 'Lucha', NULL, 460.00, 143),
-('Mewtwo', 'Psíquico', 'Bicho', NULL, 122.00, 150),
-('Pidgey', 'Normal/Volador', 'Eléctrico', 'Pidgeotto', 1.80, 16),
-('Rattata', 'Normal', 'Lucha', 'Raticate', 3.50, 19),
-('Abra', 'Psíquico', 'Fantasma', 'Kadabra', 19.50, 63);
+INSERT INTO [POKEMON_PROYECT].[dbo].[Pokemon] ([Id], [Nombre], [Tipo], [Debilidad], [Evolucion], [Peso], [Numero])
+VALUES 
+(1, 'Pikachu', 'Eléctrico', 'Tierra', 'Raichu', 6.0, 25),
+(2, 'Bulbasur', 'Planta/Veneno', 'Fuego', 'Ivysaur', 6.9, 1),
+(3, 'Charizard', 'Fuego/Volador', 'Agua', 'Mega Charizard', 90.5, 6),
+(4, 'Blastoise', 'Agua', 'Eléctrico', 'Mega Blastoise', 85.5, 9),
+(5, 'Nidoking', 'Veneno/Tierra', 'Agua', 'N/A', 62.0, 34),
+(6, 'Pidgeotto', 'Normal/Volador', 'Eléctrico', 'Pidgeot', 30.0, 17),
+(7, 'Beedrill', 'Bicho/Veneno', 'Fuego', 'Mega Beedrill', 29.5, 15),
+(8, 'Ninetales', 'Fuego', 'Agua', 'N/A', 19.9, 38),
+(9, 'Sandslash', 'Tierra', 'Agua', 'Alola Sandslash', 29.5, 28),
+(10, 'Arbok', 'Veneno', 'Psíquico', 'N/A', 65.0, 24);
 GO
