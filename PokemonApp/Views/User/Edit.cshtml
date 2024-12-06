@@ -1,4 +1,4 @@
-﻿@model PokemonApp.Models.Pokemon
+﻿@model PokemonApp.Models.Usuarios
 
 <style>
     body {
@@ -62,11 +62,7 @@
     }
 
     .btn-primary {
-        background-color: #28a745;
-    }
-
-    .btn-danger {
-        background-color: #dc3545;
+        background-color: #007bff;
     }
 
     .btn:hover {
@@ -76,29 +72,30 @@
 </style>
 
 <div class="container">
-    <h2>Create Pokémon</h2>
-    <form asp-action="Create" method="post">
-
+    <h2>Edit User</h2>
+    <form asp-action="Edit" method="post">
         @Html.AntiForgeryToken()
 
+        <input type="hidden" name="Id" value="@Model.Id" />
+
         <label for="Nombre">Name:</label>
-        <input type="text" id="Nombre" name="Nombre" required />
+        <input type="text" id="Nombre" name="Nombre" value="@Model.Nombre" required />
 
-        <label for="Tipo">Type:</label>
-        <input type="text" id="Tipo" name="Tipo" required />
+        <label for="Usuario1">Username:</label>
+        <input type="text" id="Usuario1" name="Usuario1" value="@Model.Usuario1" required />
 
-        <label for="Debilidad">Weakness:</label>
-        <input type="text" id="Debilidad" name="Debilidad" />
+        <label for="RolId">Role:</label>
+        <select id="RolId" name="RolId" required>
+            <option value="" disabled>Select a Role</option>
+            @foreach (var role in (IEnumerable<SelectListItem>)ViewBag.Roles)
+            {
+                <option value="@role.Value" @(role.Value == Model.RolId.ToString() ? "selected" : "")>@role.Text</option>
+            }
+        </select>
 
-        <label for="Evolucion">Evolution:</label>
-        <input type="text" id="Evolucion" name="Evolucion" />
+        <label for="Contraseña">Password:</label>
+        <input type="password" id="Contraseña" name="Contraseña" required />
 
-        <label for="Peso">Weight (kg):</label>
-        <input type="number" step="0.01" id="Peso" name="Peso" />
-
-        <label for="Numero">Number:</label>
-        <input type="number" id="Numero" name="Numero" required />
-
-        <button type="submit" class="btn btn-primary">Create Pokémon</button>
+        <button type="submit" class="btn btn-primary">Update User</button>
     </form>
 </div>
