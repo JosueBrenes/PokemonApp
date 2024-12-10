@@ -7,7 +7,7 @@ namespace PokemonApp.Controllers
 {
     public class NurseController : Controller
     {
-        private DatabaseEntities db = new DatabaseEntities(); // Conexión a la base de datos
+        private DatabaseEntities db = new DatabaseEntities(); 
         private static List<NurseRequest> nurseRequests = new List<NurseRequest>();
 
         public ActionResult Index()

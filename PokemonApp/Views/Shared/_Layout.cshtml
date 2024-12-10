@@ -18,7 +18,7 @@
             background-color: #faf8ef;
             color: #000;
             border-bottom: 4px solid #333;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
             box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
         }
@@ -28,30 +28,51 @@
                 margin: 0;
             }
 
-            header nav {
-                margin-top: 10px;
-            }
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
 
-            header a {
-                color: #000;
+            nav a {
+                background-color: #007bff;
+                color: #fff;
                 text-decoration: none;
-                margin: 0 10px;
+                padding: 10px 15px;
+                font-size: 12px;
+                border: 2px solid #333;
+                box-shadow: 2px 2px 0px #000;
             }
 
-                header a:hover {
-                    text-decoration: underline;
+                nav a:hover {
+                    background-color: #0056b3;
                 }
+
+        .btn-logout {
+            background-color: #dc3545;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 12px;
+            border: 2px solid #333;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+            .btn-logout:hover {
+                background-color: #c82333;
+            }
     </style>
 </head>
 <body>
     <header>
         <h1>Pokémon Management System</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/Pokedex">Pokédex</a>
-            <a href="/Trainer">Trainers</a>
-            <a href="/Admin">Admin</a>
-            <a href="/Nurse">Nurse</a>
+            @if (Session["UsuarioActual"] != null)
+            {
+                <a href="/">Home</a>
+                <a href="@Url.Action("Logout", "Auth")" class="btn-logout">Logout</a>
+            }
         </nav>
     </header>
 

@@ -85,57 +85,81 @@
     <div class="container">
         <h1>Welcome to the Pokémon Management System</h1>
         <p>Manage your trainers, Pokémon, users, and battles all in one place.</p>
-        <a href="@Url.Action("Index", "Pokedex")" class="btn btn-primary">Explore the Pokédex &raquo;</a>
+        @if (ViewBag.RolId == 4)
+        {
+            <a href="@Url.Action("Index", "Pokedex")" class="btn btn-primary">Explore the Pokédex &raquo;</a>
+        }
 
         <div class="row">
             <!-- Trainer View -->
-            <div class="section">
-                <h2>Trainer View</h2>
-                <p>Manage trainers' Pokémon teams, explore stats, and handle challenges.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Index", "Trainer")">Go to Trainers &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 4)
+            {
+                <div class="section">
+                    <h2>Trainer View</h2>
+                    <p>Manage trainers' Pokémon teams, explore stats, and handle challenges.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Index", "Trainer")">Go to Trainers &raquo;</a>
+                </div>
+            }
 
             <!-- Admin View -->
-            <div class="section">
-                <h2>Admin View</h2>
-                <p>Manage the Pokédex, control the system, and ensure proper functionality.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Index", "Admin")">Admin Panel &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 2)
+            {
+                <div class="section">
+                    <h2>Admin View</h2>
+                    <p>Manage the Pokédex, control the system, and ensure proper functionality.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Index", "Admin")">Admin Panel &raquo;</a>
+                </div>
+            }
 
             <!-- Nurse View -->
-            <div class="section">
-                <h2>Nurse View</h2>
-                <p>Handle nursing requests, healing, and support for injured Pokémon.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Index", "Nurse")">Go to Nursing &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 11)
+            {
+                <div class="section">
+                    <h2>Nurse View</h2>
+                    <p>Handle nursing requests, healing, and support for injured Pokémon.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Index", "Nurse")">Go to Nursing &raquo;</a>
+                </div>
+            }
 
             <!-- Trainer's Team -->
-            <div class="section">
-                <h2>Trainer's Team</h2>
-                <p>Set up and view Pokémon teams for trainers.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Team", "Trainer")">View Teams &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 4)
+            {
+                <div class="section">
+                    <h2>Trainer's Team</h2>
+                    <p>Set up and view Pokémon teams for trainers.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Team", "Trainer")">View Teams &raquo;</a>
+                </div>
+            }
 
             <!-- Battle Challenges -->
-            <div class="section">
-                <h2>Battle Challenges</h2>
-                <p>Create and manage battle challenges between Pokémon trainers.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Index", "Battle")">Manage Challenges &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 4)
+            {
+                <div class="section">
+                    <h2>Battle Challenges</h2>
+                    <p>Create and manage battle challenges between Pokémon trainers.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Index", "Battle")">Manage Challenges &raquo;</a>
+                </div>
+            }
 
             <!-- Nursing Requests -->
-            <div class="section">
-                <h2>Nursing Requests</h2>
-                <p>Manage nursing requests for injured Pokémon.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("Requests", "Nurse")">View Requests &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 11)
+            {
+                <div class="section">
+                    <h2>Nursing Requests</h2>
+                    <p>Manage nursing requests for injured Pokémon.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Requests", "Nurse")">View Requests &raquo;</a>
+                </div>
+            }
 
             <!-- Submit Pokémon to Nursing -->
-            <div class="section">
-                <h2>Submit Pokémon</h2>
-                <p>Submit a Pokémon to the nursing center for healing and care.</p>
-                <a class="btn btn-outline-dark" href="@Url.Action("CreateRequest", "Nurse")">Submit to Nursing &raquo;</a>
-            </div>
+            @if (ViewBag.RolId == 11)
+            {
+                <div class="section">
+                    <h2>Submit Pokémon</h2>
+                    <p>Submit a Pokémon to the nursing center for healing and care.</p>
+                    <a class="btn btn-outline-dark" href="@Url.Action("CreateRequest", "Nurse")">Submit to Nursing &raquo;</a>
+                </div>
+            }
         </div>
     </div>
 </main>

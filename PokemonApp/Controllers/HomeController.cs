@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,20 @@ namespace PokemonApp.Controllers
     {
         public ActionResult Index()
         {
+            var usuarioActual = Session["UsuarioActual"] as Usuarios; 
+            if (usuarioActual != null)
+            {
+                ViewBag.RolId = usuarioActual.RolId;
+            }
+            else
+            {
+                ViewBag.RolId = 0; 
+            }
+
             return View();
         }
+
+
 
         public ActionResult About()
         {
