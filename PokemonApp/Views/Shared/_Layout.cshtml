@@ -70,7 +70,7 @@
         <nav>
             @if (Session["UsuarioActual"] != null)
             {
-                <a href="/">Home</a>
+                <a href="/Home/Index">Home</a>
                 <a href="@Url.Action("Logout", "Auth")" class="btn-logout">Logout</a>
             }
         </nav>
